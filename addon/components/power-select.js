@@ -144,7 +144,7 @@ export default Component.extend({
   // based on selectedItemComponent, the logic to render will change, selectedItemComponent + input with searchEnabled
   // in single select cannot exist next to next
   hasSIC: computed('selectedItemComponent', function() {
-    return isPresent(this.get('selectedItemComponent'));
+    return isPresent(this.get('selectedItemComponent')) || this.get('allowRenderLikeSIC');
   }),
 
   // single select + inline search (autocomplete or more than 10 options) + no custom selected item component
