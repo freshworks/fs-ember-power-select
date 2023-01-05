@@ -367,13 +367,18 @@ export default Component.extend({
       if (action) {
         correctedTerm = action(term, publicAPI, e);
         if (correctedTerm === false) {
+          // for autocomplete fields with or withour url search, when dropdown is closed but input still has focus & 
+          // when a char is typed it dropdown opens but input loses typed char. To retain that below logic is required
+          if(term.length === 1 && !publicAPI.isOpen && this.get('searchEnabled') && this.get('mustShowSearchMessage')) {
+            this.updateState({ searchText: term, lastSearchedText: term, loading: false });
+          }
           return;
         }
       }
 
       // search enabled non auto complete fields on input auto open dropdown
-      if(!this.get('publicAPI').isOpen && this.get('searchEnabled') && !this.get('mustShowSearchMessage')) {
-        this.get('publicAPI').actions.open();
+      if(!publicAPI.isOpen && this.get('searchEnabled') && !this.get('mustShowSearchMessage')) {
+        publicAPI.actions.open();
       }
 
       publicAPI.actions.search(typeof correctedTerm === 'string' ? correctedTerm : term);
