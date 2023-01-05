@@ -92,7 +92,7 @@ export default Component.extend({
   defaultHighlighted: fallbackIfUndefined(defaultHighlighted),
   typeAheadMatcher: fallbackIfUndefined(defaultTypeAheadMatcher),
   highlightOnHover: fallbackIfUndefined(true),
-
+  allowRenderLikeSIC: fallbackIfUndefined(false),
   afterOptionsComponent: fallbackIfUndefined(null),
   beforeOptionsComponent: fallbackIfUndefined(null),
   optionsComponent: fallbackIfUndefined('power-select/options'),
