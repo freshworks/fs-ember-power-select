@@ -21,8 +21,8 @@
     allowClear=allowClear
     labelText=labelText
     search=search
-    clearMessage=(readonly clearMessage)
-    removeOptionMessage=(readonly removeOptionMessage)
+    clearMessage=(or clearLabel clearMessage)
+    removeOptionMessage=(or removeLabel removeOptionMessage)
     allowNull=allowNull
   }}
   {{#dropdown.trigger
@@ -79,7 +79,7 @@
       animationEnabled=(readonly animationEnabled)
       searchPlaceholder=(readonly searchPlaceholder)
       allowCreateOnBlur=allowCreateOnBlur
-      removeOptionMessage=removeOptionMessage
+      removeOptionMessage=(or removeLabel removeOptionMessage)
       hasSIC=hasSIC
       as |opt term|}}
       {{yield opt term}}
