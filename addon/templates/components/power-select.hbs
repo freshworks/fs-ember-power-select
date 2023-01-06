@@ -26,7 +26,7 @@
     allowNull=allowNull
   }}
   {{#dropdown.trigger
-    role=(or triggerRole null)
+    role=(or (if (and hasSIC dropdown.isOpen) "group" triggerRole) null)
     tagName=(readonly _triggerTagName)
     ariaDescribedBy=(if (or multiSelect canInlineSearch) undefined computedAriaDescribedBy)
     ariaInvalid=(readonly ariaInvalid)
