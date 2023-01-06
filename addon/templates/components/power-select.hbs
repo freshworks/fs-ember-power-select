@@ -23,7 +23,6 @@
     search=search
     clearMessage=(or clearLabel clearMessage)
     removeOptionMessage=(or removeLabel removeOptionMessage)
-    allowRenderLikeSIC=allowRenderLikeSIC
     allowNull=allowNull
   }}
   {{#dropdown.trigger
@@ -51,6 +50,7 @@
   }}
     {{#component triggerComponent
       allowClear=(readonly allowClear)
+      allowRenderLikeSIC=allowRenderLikeSIC
       buildSelection=(readonly buildSelection)
       extra=(readonly extra)
       listboxId=(readonly optionsId)

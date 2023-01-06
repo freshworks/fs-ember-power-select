@@ -178,7 +178,7 @@ export default Component.extend({
     if(this.get('multiSelect')) {
       return null;
     } else if(this.get('searchEnabled')) {
-      return this.get('hasSIC') ? 'button' : null;
+      return this.get('hasSIC') ? 'group' : null;
     }
     return 'combobox';
   }),
