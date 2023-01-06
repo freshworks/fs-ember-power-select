@@ -1,4 +1,5 @@
-{{#if (or (and searchEnabled (not selectedItemComponent)) (and select.isOpen searchEnabled (or selectedItemComponent allowRenderLikeSIC)))}}
+{{#if (or (and searchEnabled (not selectedItemComponent) (not allowRenderLikeSIC)) 
+      (and select.isOpen searchEnabled (or selectedItemComponent allowRenderLikeSIC)))}}
   {{#component "power-select/search-input"
     searchValue=searchValue
     searchEnabled=searchEnabled
