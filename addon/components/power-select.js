@@ -129,6 +129,11 @@ export default Component.extend({
     assert('{{power-select}} requires an `onchange` function', this.get('onchange') && typeof this.get('onchange') === 'function');
   },
 
+  didInsertElement() {
+    let dropdownTrigger = document.querySelector(`[aria-owns="ember-basic-dropdown-content-${this.get('publicAPI.uniqueId')}"]`);
+    dropdownTrigger.removeAttribute('aria-owns');
+  },
+
   willDestroy() {
     this._super(...arguments);
     this._removeObserversInOptions();
