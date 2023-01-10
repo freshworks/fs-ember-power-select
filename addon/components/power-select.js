@@ -372,8 +372,8 @@ export default Component.extend({
       if (action) {
         correctedTerm = action(term, publicAPI, e);
         if (correctedTerm === false) {
-          // for autocomplete fields with or withour url search, when dropdown is closed but input still has focus & 
-          // when a char is typed it dropdown opens but input loses typed char. To retain that below logic is required
+          // for auto-complete fields with or withour url search, when dropdown is closed but input still has focus & 
+          // when a char is typed, dropdown opens but input loses typed char. To retain that below logic is required
           if(term.length === 1 && !publicAPI.isOpen && this.get('searchEnabled') && this.get('mustShowSearchMessage')) {
             this.updateState({ searchText: term, lastSearchedText: term, loading: false });
           }
@@ -381,7 +381,7 @@ export default Component.extend({
         }
       }
 
-      // search enabled non auto complete fields on input auto open dropdown
+      // search enabled for non auto-complete fields on typing in input auto open dropdown
       if(!publicAPI.isOpen && this.get('searchEnabled') && !this.get('mustShowSearchMessage')) {
         publicAPI.actions.open();
       }
@@ -512,6 +512,17 @@ export default Component.extend({
     },
 
     onFocus(event) {
+      // TODO: REFACTOR ONCE LEGACY CODE IS REMOVED
+      // We rely on focus event in legacy for performing form submit for cmd+enter key combo
+      // as focus event is trigger it goes to first input in page which in turn calls this function
+      // causing the dropdown to open on page load itself when transitioning from legacy to ember.
+      let isKeyboarduser = false;
+      let bodyEl = document.querySelector('body');
+
+      if(isPresent(bodyEl)) {
+        isKeyboarduser = bodyEl.classList.contains('keyboard-user');
+      }
+
       this.send('activate');
       let action = this.get('onfocus');
       if (action) {
@@ -519,7 +530,8 @@ export default Component.extend({
       }
 
       // for autocomplete fields alone, auto open dropdown when the input field receives focus
-      if(this.get('searchEnabled') && this.get('mustShowSearchMessage')) {
+      // this was added explicitly for keyboard users navigating via keyboard tab key
+      if(isKeyboarduser && this.get('searchEnabled') && this.get('mustShowSearchMessage')) {
         this.get('publicAPI').actions.open();
       }
     },
@@ -877,7 +889,8 @@ export default Component.extend({
       return this._handleKeyESC(e);
     } else if(this.get('allowCreateOnBlur') && e.keyCode === 8) {
       run.next(() => {
-        // to capture meta key + a and pressing backspace which removes all chars we have put inside run loop
+        // to capture (meta key + a) which is select all chars behaviour + remvol
+        // and pressing backspace which removes all chars we have put inside run loop
         return this._handleKeyBackspace(e);
       });
     }

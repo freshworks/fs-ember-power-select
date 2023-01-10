@@ -1,8 +1,6 @@
 import Component from '@ember/component';
 import layout from '../../templates/components/power-select/search-input';
 
-import { isPresent } from '@ember/utils';
-import { computed } from '@ember/object';
 import { get } from '@ember/object';
 import { later, scheduleOnce } from '@ember/runloop';
 
