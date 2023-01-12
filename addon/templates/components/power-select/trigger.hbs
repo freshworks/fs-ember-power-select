@@ -23,7 +23,11 @@
 
   {{#if (and select.selected (not selectedItemComponent))}}
     <span class="ember-power-select-selected-item screen-reader-only">
-      {{if searchField (get select.selected searchField) select.selected}}
+      {{#if searchField}}
+        {{get select.selected searchField}}
+      {{else}}
+        {{yield select.selected select}}
+      {{/if}}
     </span>
   {{/if}}
 {{else}}
