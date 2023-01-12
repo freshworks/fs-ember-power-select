@@ -15,6 +15,7 @@
   aria-label={{if labelText labelText null}}
   aria-describedby={{ariaDescribedBy}}
   role="combobox"
+  autofocus={{if hasSIC true null}}
   disabled={{select.disabled}}
   oninput={{onInput}}
   onfocus={{onFocus}}
