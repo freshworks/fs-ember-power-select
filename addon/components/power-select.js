@@ -682,7 +682,9 @@ export default Component.extend({
 
   updateInput() {
     let input = document.getElementById(`ember-power-select-search-input-trigger-${this.get('publicAPI.uniqueId')}`);
-    input.value = this.get('searchValue');
+    if(isPresent(input)) {
+      input.value = this.get('searchValue');
+    }
   },
 
   handleMultiSelect(publicAPI, e) {
