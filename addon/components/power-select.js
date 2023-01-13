@@ -437,6 +437,8 @@ export default Component.extend({
         if(this.get('multiSelect')) {
           if(this.get('searchEnabled')) {
             publicAPI.actions.search('');
+            // close multi select dropdown on selection via mouse
+            publicAPI.actions.close(e);
             this.focusInput();
             return false;
           }
