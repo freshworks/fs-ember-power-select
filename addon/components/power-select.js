@@ -246,7 +246,13 @@ export default Component.extend({
 
     let isSelectedString = typeOf(selected) === 'string';
 
-    return selected ? (isSelectedString ? selected : searchField ? selectedValueWithSearchField : selected) : searchText;
+    // has selected item component or the flag is explicitly set to true, then retain old behaviour
+    if(this.get('hasSIC')) {
+      return searchField && selected ? selectedValueWithSearchField : isSelectedString ? selected : searchText;
+    } else {
+      // only if allowRenderLikeSIC is set to false
+      return selected ? (isSelectedString ? selected : searchField ? selectedValueWithSearchField : selected) : searchText;
+    }
   }),
 
   options: computed({
@@ -440,7 +446,7 @@ export default Component.extend({
 
         publicAPI.actions.close(e);
         // after choosing an option, clear the search text input
-        publicAPI.actions.search('');
+        this.get('searchEnabled') && publicAPI.actions.search('');
         return false;
       }
     },
@@ -681,6 +687,7 @@ export default Component.extend({
   },
 
   updateInput() {
+    // will be updated only if component can inline search
     let input = document.getElementById(`ember-power-select-search-input-trigger-${this.get('publicAPI.uniqueId')}`);
     if(isPresent(input)) {
       input.value = this.get('searchValue');
@@ -903,7 +910,7 @@ export default Component.extend({
     let inputField = document.getElementById(`ember-power-select-search-input-trigger-${publicAPI.uniqueId}`);
 
     if(inputField && isEmpty(inputField.value) && isPresent(publicAPI.selected)) {
-      this.get('publicAPI').actions.select(null);
+      publicAPI.actions.select(null);
     }
   },
 
