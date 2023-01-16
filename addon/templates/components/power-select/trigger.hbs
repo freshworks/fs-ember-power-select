@@ -29,7 +29,7 @@
   {{/component}}
 
   {{#if (and select.selected (not selectedItemComponent))}}
-    <span class="ember-power-select-selected-item screen-reader-only">
+    <span class="ember-power-select-selected-item screen-reader-only" aria-hidden="true">
       {{#if searchField}}
         {{get select.selected searchField}}
       {{else}}
@@ -55,14 +55,18 @@
 
 {{#if labelText}}
   <span id={{ariaLabelledById}} class="screen-reader-only" aria-hidden="true">
-    {{#if select.selected}}
-      {{#if searchField}}
-        {{concat (get select.selected searchField) ", " labelText}}
-      {{else}}
-        {{yield select.selected select}} {{concat ", " labelText}}
-      {{/if}}
-    {{else}}
+    {{#if (and searchEnabled (not selectedItemComponent) (not allowRenderLikeSIC))}}
       {{labelText}}
+    {{else}}
+      {{#if select.selected}}
+        {{#if searchField}}
+          {{concat (get select.selected searchField) ", " labelText}}
+        {{else}}
+          {{yield select.selected select}} {{concat ", " labelText}}
+        {{/if}}
+      {{else}}
+        {{labelText}}
+      {{/if}}
     {{/if}}
   </span>
 {{/if}}
