@@ -201,7 +201,7 @@ export default Component.extend({
     return this.get('renderInVC') || this.get('options.length') > 500;
   }),
 
-  ariaLabelledById: computed('labelText', function () {
+  ariaLabelledById: computed('labelText', 'publicAPI.uniqueId', function () {
     let baseId = this.get('publicAPI.uniqueId');
     if(this.get('multiSelect')) {
       return `ember-power-select-trigger-multiple-label-${baseId}`;

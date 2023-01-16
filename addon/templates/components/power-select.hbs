@@ -23,6 +23,7 @@
     search=search
     clearMessage=(or clearLabel clearMessage)
     removeOptionMessage=(or removeLabel removeOptionMessage)
+    ariaLabel=(readonly ariaLabel)
     allowNull=allowNull
   }}
   {{#dropdown.trigger
@@ -30,8 +31,8 @@
     tagName=(readonly _triggerTagName)
     ariaDescribedBy=(if (or multiSelect canInlineSearch) undefined computedAriaDescribedBy)
     ariaInvalid=(readonly ariaInvalid)
-    ariaLabel=(readonly ariaLabel)
-    ariaLabelledBy=(if (and labelText (or multiSelect canInlineSearch)) undefined ariaLabelledById)
+    ariaLabel=(if labelText null (or ariaLabel null))
+    ariaLabelledBy=(if (or multiSelect canInlineSearch) undefined (if labelText ariaLabelledById (or ariaLabelledBy null)))
     ariaRequired=(readonly required)
     title=(readonly title)
     class=(readonly concatenatedTriggerClasses)
@@ -51,6 +52,7 @@
     {{#component triggerComponent
       allowClear=(readonly allowClear)
       allowRenderLikeSIC=allowRenderLikeSIC
+      ariaLabelledById=ariaLabelledById
       buildSelection=(readonly buildSelection)
       extra=(readonly extra)
       listboxId=(readonly optionsId)
@@ -142,6 +144,7 @@
         multiSelect=(or multiSelect false)
         searchEnabled=(readonly searchEnabled)
         allowNull=allowNull
+        ariaLabel=(readonly ariaLabel)
         allowNullLabel=allowNullLabel
         search=search
         as |option term|}}

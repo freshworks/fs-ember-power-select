@@ -73,7 +73,9 @@ export default Component.extend({
     return this.get('multiSelect') ? 'true' : 'false'
   }),
 
-  'aria-label': reads('labelText'),
+  'aria-label': computed(function() {
+    return this.get('labelText') || this.get('ariaLabel');
+  }),
 
   // Methods
   _addTouchEvents() {
