@@ -39,6 +39,7 @@
   aria-label={{if labelText null (or ariaLabel null)}}
   aria-describedby={{ariaDescribedBy}}
   aria-labelledby={{if labelText ariaLabelledById (or ariaLabelledBy null)}}
+  aria-required={{if ariaRequired "true" null}}
   role="combobox"
   style={{triggerMultipleInputStyle}}
   placeholder={{or maybePlaceholder null}}
