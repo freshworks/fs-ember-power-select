@@ -32,7 +32,7 @@
     ariaDescribedBy=(if (or multiSelect canInlineSearch) undefined computedAriaDescribedBy)
     ariaInvalid=(readonly ariaInvalid)
     ariaLabel=(if labelText null (or ariaLabel null))
-    ariaLabelledBy=(if (or multiSelect canInlineSearch) undefined (if labelText ariaLabelledById (or ariaLabelledBy null)))
+    ariaLabelledBy=(if (or multiSelect canInlineSearch) undefined (if labelText (or fieldId ariaLabelledById) (or ariaLabelledBy null)))
     ariaRequired=(if (or multiSelect canInlineSearch) null required)
     title=(readonly title)
     class=(readonly concatenatedTriggerClasses)
@@ -86,6 +86,7 @@
       ariaRequired=(readonly required)
       removeOptionMessage=(or removeLabel removeOptionMessage)
       hasSIC=hasSIC
+      fieldId=(or fieldId null)
       as |opt term|}}
       {{yield opt term}}
     {{/component}}
