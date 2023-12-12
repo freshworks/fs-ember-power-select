@@ -526,6 +526,7 @@ export default Component.extend({
       // causing the dropdown to open on page load itself when transitioning from legacy to ember.
       let isKeyboarduser = false;
       let bodyEl = document.querySelector('body');
+      let publicAPI = this.get('publicAPI');
 
       if(isPresent(bodyEl)) {
         isKeyboarduser = bodyEl.classList.contains('keyboard-user');
