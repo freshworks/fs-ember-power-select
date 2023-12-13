@@ -526,6 +526,7 @@ export default Component.extend({
       // causing the dropdown to open on page load itself when transitioning from legacy to ember.
       let isKeyboarduser = false;
       let bodyEl = document.querySelector('body');
+      let publicAPI = this.get('publicAPI');
 
       if(isPresent(bodyEl)) {
         isKeyboarduser = bodyEl.classList.contains('keyboard-user');
@@ -541,6 +542,11 @@ export default Component.extend({
       // this was added explicitly for keyboard users navigating via keyboard tab key
       if(isKeyboarduser && this.get('searchEnabled') && this.get('mustShowSearchMessage')) {
         this.get('publicAPI').actions.open();
+      }
+
+      // selected value is present + search is enabled + not multi select + not an autocomplete + flag is passed
+      if(publicAPI.selected && this.get('searchEnabled') && !this.get('multiSelect') && !this.get('search') && !this.get('allowRenderLikeSIC')) {
+        event && event.target && event.target.select();
       }
     },
 
