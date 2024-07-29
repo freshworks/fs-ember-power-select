@@ -5,7 +5,7 @@ import { inject } from '@ember/service';
 import { scheduleOnce, run } from '@ember/runloop';
 import { assert } from '@ember/debug';
 import { isBlank } from '@ember/utils';
-import { htmlSafe } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 import layout from '../../templates/components/power-select-multiple/trigger';
 import fallbackIfUndefined from '../../utils/computed-fallback-if-undefined';
 
